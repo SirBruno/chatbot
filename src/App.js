@@ -11,7 +11,6 @@ function App() {
       <p>{ value }</p>
       <ChatBot
         steps={[
-
           {
             id: '1',
             message: 'Qual o seu nome?',
@@ -24,7 +23,7 @@ function App() {
           },
           {
             id: '3',
-            message: ({ previousValue, steps }) => {console.log(previousValue); return `vai vc otário`},
+            message: ({ previousValue, steps }) => {console.log(previousValue); return `fodase kkkkkkkk`},
             end: true,
           }
         ]}
