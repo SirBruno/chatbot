@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import ChatBot from 'react-simple-chatbot';
 
 function App() {
+
+  const [value, setValue] = useState(null);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>{ value }</p>
+      <ChatBot
+        steps={[
+
+          {
+            id: '1',
+            message: 'Qual o seu nome?',
+            trigger: '2',
+          },
+          {
+            id: '2',
+            user: true,
+            trigger: '3',
+          },
+          {
+            id: '3',
+            message: ({ previousValue, steps }) => {console.log(previousValue); return `vai vc otário`},
+            end: true,
+          }
+        ]}
+      />
     </div>
   );
 }
