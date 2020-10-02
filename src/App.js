@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import ChatBot from 'react-simple-chatbot';
+import botImg from './assets/botImg.png';
 
 function App() {
 
@@ -8,12 +9,12 @@ function App() {
 
   return (
     <div className="App">
-      <p>{ value }</p>
-      <ChatBot
+      <p>{value}</p>
+      <ChatBot width="400px" botAvatar={botImg}
         steps={[
           {
             id: '1',
-            message: 'Qual o seu nome?',
+            message: 'Qual a boa de hoje, chefe?',
             trigger: '2',
           },
           {
@@ -23,11 +24,21 @@ function App() {
           },
           {
             id: '3',
-            message: ({ previousValue, steps }) => {console.log(previousValue);
-              if(previousValue.toLowerCase() === 'bruno') {
-              return `Em que posso ajudar, mestre?`
-            } else return `fodase kkkkkkkk`},
-            end: true,
+            message: ({ previousValue, steps }) => {
+              console.log(previousValue);
+              if (previousValue.toLowerCase() === 'bruno') {
+                return `Em que posso ajudar, mestre?`
+              } else if (previousValue.includes('vegano')) {
+                return `Vegano é meu ovo`
+              } else if (previousValue.includes('time')) {
+                return `Eu nem assisto futebol parcero`
+              } else if (previousValue.includes('tudo bem?')) {
+                return `Sim, e vc?`
+              } else if (previousValue.toLowerCase() === 'tudo') {
+                return `legal`
+              } else return `fodase kkkkkkkk`
+            },
+            trigger: '2'
           }
         ]}
       />
