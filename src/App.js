@@ -21,7 +21,7 @@ function App() {
             id: '2',
             options: [
               { value: 1, label: 'Orçamento', trigger: '2' },
-              { value: 2, label: 'Serviços', trigger: '2' },
+              { value: 2, label: 'Serviços', trigger: '6' },
               { value: 3, label: 'Valores', trigger: '3' },
             ],
             trigger: '2',
@@ -60,6 +60,16 @@ function App() {
                 return `legal`
               } else return `fodase kkkkkkkk`
             },
+            trigger: '2'
+          },
+          {
+            id: '6',
+            component: (
+              <div>
+                <div><b>Nossos serviços</b></div>
+                <div>Nós ofereçemos serviços de desenvolvimento web e design gráfico.</div>
+              </div>
+            ),
             trigger: '2'
           }
         ]}
