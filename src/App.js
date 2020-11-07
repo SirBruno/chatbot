@@ -3,6 +3,17 @@ import './App.css';
 import ChatBot from 'react-simple-chatbot';
 import botImg from './assets/botImg.png';
 
+function Stuff(props) {
+  console.log(props.steps)
+  return (
+    <div>
+      <p><b>Páginas</b>: {props.steps[20].message}</p>
+      <p><b>Serviço de design</b>: {props.steps[9].message === 'Sim' ? 'Não incluso' : props.steps[11].message === 'Sim' ? 'Incluso' : 'Não incluso'}</p>
+      <p><b>Serviço de logo</b>: {props.steps[13].message === 'Sim' ? 'Não incluso' : props.steps[18].message === 'Sim' ? 'Incluso' : 'Não incluso'}</p>
+    </div>
+  )
+}
+
 function App() {
 
   // const [lastMsg, setLastMsg] = useState(null);
@@ -24,8 +35,7 @@ function App() {
               { value: 1, label: 'Orçamento', trigger: '5' },
               { value: 2, label: 'Serviços', trigger: '6' },
               { value: 3, label: 'Valores', trigger: '3' },
-            ],
-            trigger: '2',
+            ]
           },
           {
             id: '3',
@@ -67,11 +77,10 @@ function App() {
           {
             id: '17',
             options: [
-              { value: 1, label: 'Sim', trigger: '5' },
+              { value: 1, label: 'Sim', trigger: '8' },
               { value: 2, label: 'Não', trigger: '7' },
               { value: 3, label: 'Não sei dizer', trigger: '16' },
-            ],
-            trigger: '17'
+            ]
           },
           {
             id: '16',
@@ -98,7 +107,7 @@ function App() {
           {
             id: '9',
             options: [
-              { value: 1, label: 'Sim', trigger: '8' },
+              { value: 1, label: 'Sim', trigger: '12' },
               { value: 2, label: 'Não', trigger: '10' }
             ]
           },
@@ -122,7 +131,7 @@ function App() {
           {
             id: '13',
             options: [
-              { value: 1, label: 'Sim', trigger: '12' },
+              { value: 1, label: 'Sim', trigger: '19' },
               { value: 2, label: 'Não', trigger: '14' }
             ]
           },
@@ -134,8 +143,8 @@ function App() {
           {
             id: '18',
             options: [
-              { value: 1, label: 'Sim', trigger: '12' },
-              { value: 2, label: 'Não', trigger: '14' }
+              { value: 1, label: 'Sim', trigger: '19' },
+              { value: 2, label: 'Não', trigger: '19' }
             ]
           },
           {
@@ -147,7 +156,22 @@ function App() {
               </div>
             ),
             trigger: '14'
-          }
+          },
+          {
+            id: '19',
+            message: 'Quantas páginas o site vai ter?',
+            trigger: '20'
+          },
+          {
+            id: '20',
+            user: true,
+            trigger: '21',
+          },
+          {
+            id: '21',
+            component: <Stuff />,
+            trigger: '19'
+          },
         ]}
       />
     </div>
