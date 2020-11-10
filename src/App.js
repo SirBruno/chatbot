@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import ChatBot from 'react-simple-chatbot';
 import botImg from './assets/botImg.png';
 
 function Stuff(props) {
   console.log(props.steps)
+  const [lastMsg, setLastMsg] = useState({ designService: null, logoService: null });
+
+  if ((props.steps[18].message === 'Sim') && (lastMsg.designService === null)) {
+    setLastMsg({ designService: 3000, logoService: null })
+  }
+
   return (
     <div>
       <p><b>Páginas</b>: {props.steps[20].message}</p>
       <p><b>Serviço de design</b>: {props.steps[9].message === 'Sim' ? 'Não incluso' : props.steps[11].message === 'Sim' ? 'Incluso' : 'Não incluso'}</p>
       <p><b>Serviço de logo</b>: {props.steps[13].message === 'Sim' ? 'Não incluso' : props.steps[18].message === 'Sim' ? 'Incluso' : 'Não incluso'}</p>
+      <p><b>Total</b>: { lastMsg.designService }</p>
     </div>
   )
 }
