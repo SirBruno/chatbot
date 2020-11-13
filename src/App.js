@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
+import LogoService from './LogoService';
+import TotalService from './TotalService';
 import './App.css';
 import ChatBot from 'react-simple-chatbot';
 import botImg from './assets/botImg.png';
 
-function Stuff(props) {
-  console.log(props.steps)
-  const [lastMsg, setLastMsg] = useState({ designService: null, logoService: null });
+function Quote(props) {
 
-  if ((props.steps[18].message === 'Sim') && (lastMsg.designService === null)) {
-    setLastMsg({ designService: 3000, logoService: null })
+  console.log(props.steps)
+  const [quoteData, setQuoteData] = useState({ designService: 0, logoService: 0 });
+  if (props.steps[13].message === 'Não') {
+    if ((props.steps[18].message === 'Sim') && (quoteData.logoService === 0)) {
+      setQuoteData({ designService: 0, logoService: 4000.00 })
+    }
   }
 
   return (
     <div>
       <p><b>Páginas</b>: {props.steps[20].message}</p>
       <p><b>Serviço de design</b>: {props.steps[9].message === 'Sim' ? 'Não incluso' : props.steps[11].message === 'Sim' ? 'Incluso' : 'Não incluso'}</p>
-      <p><b>Serviço de logo</b>: {props.steps[13].message === 'Sim' ? 'Não incluso' : props.steps[18].message === 'Sim' ? 'Incluso' : 'Não incluso'}</p>
-      <p><b>Total</b>: { lastMsg.designService }</p>
+      <LogoService quoteData={props} />
+      <TotalService quoteData={props} />
     </div>
   )
 }
@@ -176,7 +180,7 @@ function App() {
           },
           {
             id: '21',
-            component: <Stuff />,
+            component: <Quote />,
             trigger: '19'
           },
         ]}
