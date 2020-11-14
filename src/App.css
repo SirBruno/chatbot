@@ -24,3 +24,8 @@ body {
 .rsc-os-option button:hover {
   cursor: pointer !important;
 }
+
+.quoteFinalVal {
+  border-top: thin solid #dadada;
+  padding-top: 10px;
+}

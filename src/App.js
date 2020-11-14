@@ -1,26 +1,34 @@
 import React, { useState } from 'react';
 import LogoService from './LogoService';
 import TotalService from './TotalService';
+import DesignService from './DesignService';
 import './App.css';
 import ChatBot from 'react-simple-chatbot';
 import botImg from './assets/botImg.png';
+import $ from 'jquery';
+import 'jquery-mask-plugin/dist/jquery.mask.min';
 
 function Quote(props) {
 
-  console.log(props.steps)
-  const [quoteData, setQuoteData] = useState({ designService: 0, logoService: 0 });
-  if (props.steps[13].message === 'Não') {
-    if ((props.steps[18].message === 'Sim') && (quoteData.logoService === 0)) {
-      setQuoteData({ designService: 0, logoService: 4000.00 })
-    }
+  const [pgsPrice, setPgsPrice] = useState(0);
+
+  const formatNum = (n) => n.toFixed(2).replace(/.([^.]*)$/, ",$1");
+  const websitePrice = 5000.00;
+  const addPagePrice = 450.00;
+
+  if ((props.steps[20].message > 10) && pgsPrice === 0) {
+    setPgsPrice((props.steps[20].message - 10) * addPagePrice);
   }
+
+  $('.money').mask('000.000.000.000.000,00', { reverse: true });
 
   return (
     <div>
-      <p><b>Páginas</b>: {props.steps[20].message}</p>
-      <p><b>Serviço de design</b>: {props.steps[9].message === 'Sim' ? 'Não incluso' : props.steps[11].message === 'Sim' ? 'Incluso' : 'Não incluso'}</p>
+      <p><b>Website (base de preço)</b>: R$ <span className="money">{formatNum(websitePrice)}</span></p>
+      <p><b>Páginas (x{props.steps[20].message})</b>: R$ <span className="money">{formatNum(pgsPrice)}</span></p>
+      <DesignService quoteData={props} />
       <LogoService quoteData={props} />
-      <TotalService quoteData={props} />
+      <TotalService pgsPrice={pgsPrice} websitePrice={websitePrice} quoteData={props} />
     </div>
   )
 }
