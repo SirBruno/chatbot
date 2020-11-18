@@ -2,38 +2,35 @@ import React, { useState } from 'react';
 import LogoService from './LogoService';
 import TotalService from './TotalService';
 import DesignService from './DesignService';
-import './App.css';
+import GetPrice from './GetPrice';
+import utils from './utils';
+import './assets/styles/App.css'
 import ChatBot from 'react-simple-chatbot';
 import botImg from './assets/botImg.png';
-import $ from 'jquery';
 import 'jquery-mask-plugin/dist/jquery.mask.min';
+
+utils.maskMoney();
 
 function Quote(props) {
 
   const [pgsPrice, setPgsPrice] = useState(0);
 
-  const formatNum = (n) => n.toFixed(2).replace(/.([^.]*)$/, ",$1");
-  const websitePrice = 5000.00;
-  const addPagePrice = 450.00;
-
   if ((props.steps[20].message > 10) && pgsPrice === 0) {
-    setPgsPrice((props.steps[20].message - 10) * addPagePrice);
+    setPgsPrice((props.steps[20].message - 10) * utils.pagePrice);
   }
-
-  $('.money').mask('000.000.000.000.000,00', { reverse: true });
 
   return (
     <div>
-      <p><b>Website (base de preço)</b>: R$ <span className="money">{formatNum(websitePrice)}</span></p>
-      <p><b>Páginas (x{props.steps[20].message})</b>: R$ <span className="money">{formatNum(pgsPrice)}</span></p>
+      <p><b>Website (base de preço)</b>: R$ <span className="money">5000.00</span></p>
+      <p><b>Páginas (x{props.steps[20].message})</b>: R$ <span className="money">{utils.formatNum(pgsPrice)}</span></p>
       <DesignService quoteData={props} />
       <LogoService quoteData={props} />
-      <TotalService pgsPrice={pgsPrice} websitePrice={websitePrice} quoteData={props} />
+      <TotalService pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
     </div>
   )
 }
 
-function App() {
+function App(props) {
 
   // const [lastMsg, setLastMsg] = useState(null);
   // const [quote, setQuote] = useState({ graphicDesign: 0 });
@@ -44,38 +41,42 @@ function App() {
       <ChatBot width="600px" botAvatar={botImg}
         steps={[
           {
-            id: '1',
+            id: '100',
             message: 'Olá, como posso ajudar?',
-            trigger: '2',
+            trigger: '200',
           },
           {
-            id: '2',
+            id: '200',
             options: [
-              { value: 1, label: 'Orçamento', trigger: '5' },
+              { value: 1, label: 'Orçamento', trigger: '500' },
               { value: 2, label: 'Serviços', trigger: '6' },
-              { value: 3, label: 'Valores', trigger: '3' },
+              { value: 3, label: 'Valores', trigger: '300' },
             ]
           },
           {
-            id: '3',
-            component: (
-              <div>
-                <div><b>Site institucional (5 pg.):</b><br />R$ 3.000 + R$ 300 p/ página</div>
-                <br />
-                <div><b>E-commerce (100 prod.):</b><br />R$ 7.000 + R$ 10 p/ produto</div>
-                <br />
-                <div><b>Landing page:</b><br />R$ 1.400</div>
-              </div>
-            ),
-            trigger: '2',
+            id: '300',
+            component: <GetPrice steps={props.steps} pagePrice={utils.formatNum(utils.pagePrice)} maskMoney={utils.maskMoney} websitePrice={utils.formatNum(utils.websitePrice)} />,
+            trigger: '200',
           },
           {
-            id: '4',
+            id: '400',
             user: true,
-            trigger: '3',
+            trigger: '300',
           },
           {
-            id: '5',
+            id: '500',
+            message: 'Você precisa de um site institucional ou de um e-commerce?',
+            trigger: '501'
+          },
+          {
+            id: '501',
+            options: [
+              { value: 1, label: 'Site institucional', trigger: '502' },
+              { value: 2, label: 'E-commerce', trigger: '503' }
+            ]
+          },
+          {
+            id: '502',
             message: 'Seu site precisa de funcionalidades que o WordPress não possui nativamente?',
             // message: ({ previousValue, steps }) => {
             //   console.log(previousValue);
@@ -92,6 +93,10 @@ function App() {
             //   } else return `fodase kkkkkkkk`
             // },
             trigger: '17'
+          },
+          {
+            id: '503',
+            message: 'Falta fazer: orçamento de e-commerce.',
           },
           {
             id: '17',
@@ -116,7 +121,7 @@ function App() {
           {
             id: '8',
             message: 'Desculpe, infelizmente não poderemos te ajudar.',
-            trigger: '2'
+            trigger: '200'
           },
           {
             id: '7',
