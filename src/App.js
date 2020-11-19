@@ -14,19 +14,34 @@ utils.maskMoney();
 function Quote(props) {
 
   const [pgsPrice, setPgsPrice] = useState(0);
+  const [prodPrice, setProdPrice] = useState(0);
 
-  if ((props.steps[20].message > 10) && pgsPrice === 0) {
-    setPgsPrice((props.steps[20].message - 10) * utils.pagePrice);
+  if (props.ecommerce) {
+    if ((props.steps[506].message > 100) && prodPrice === 0) {
+      setProdPrice((props.steps[506].message - 100) * utils.prodPrice);
+    }
+  } else {
+    if ((props.steps[20].message > 10) && pgsPrice === 0) {
+      setPgsPrice((props.steps[20].message - 10) * utils.pagePrice);
+    }
   }
 
+  utils.maskMoney();
+
   return (
-    <div>
-      <p><b>Website (base de preço)</b>: R$ <span className="money">5000.00</span></p>
-      <p><b>Páginas (x{props.steps[20].message})</b>: R$ <span className="money">{utils.formatNum(pgsPrice)}</span></p>
-      <DesignService quoteData={props} />
-      <LogoService quoteData={props} />
-      <TotalService pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
-    </div>
+    props.ecommerce ?
+      <div>
+        <p><b>E-commerce (base de preço)</b>: R$ <span className="money">{utils.formatNum(utils.ecommercePrice)}</span></p>
+        <p><b>Produtos (x{props.steps[506].message})</b>: R$ <span className="money">{utils.formatNum(prodPrice)}</span></p>
+        <TotalService ecommerce={true} ecommercePrice={utils.ecommercePrice} prodPrice={prodPrice} pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
+      </div>
+      : <div>
+        <p><b>Website (base de preço)</b>: R$ <span className="money">{utils.formatNum(utils.websitePrice)}</span></p>
+        <p><b>Páginas (x{props.steps[20].message})</b>: R$ <span className="money">{utils.formatNum(pgsPrice)}</span></p>
+        <DesignService quoteData={props} />
+        <LogoService quoteData={props} />
+        <TotalService pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
+      </div>
   )
 }
 
@@ -96,7 +111,32 @@ function App(props) {
           },
           {
             id: '503',
-            message: 'Falta fazer: orçamento de e-commerce.',
+            message: 'Qual plataforma de e-commerce deseja usar?',
+            trigger: '504'
+          },
+          {
+            id: '504',
+            options: [
+              { value: 1, label: 'WooCommerce', trigger: '505' },
+              { value: 2, label: 'Shopify', trigger: '505' },
+              { value: 3, label: 'Loja integrada', trigger: '505' },
+              { value: 4, label: 'VTEX', trigger: '505' },
+            ]
+          },
+          {
+            id: '505',
+            message: 'Quantos produtos deseja cadastrar na loja?',
+            trigger: '506'
+          },
+          {
+            id: '506',
+            user: true,
+            trigger: '507',
+          },
+          {
+            id: '507',
+            component: <Quote ecommerce={true} steps={props.steps} />,
+            trigger: '200'
           },
           {
             id: '17',
