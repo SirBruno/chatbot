@@ -15,10 +15,15 @@ function Quote(props) {
 
   const [pgsPrice, setPgsPrice] = useState(0);
   const [prodPrice, setProdPrice] = useState(0);
+  const [landingPagePrice, setLandingPagePrice] = useState(0);
 
   if (props.ecommerce) {
     if ((props.steps[506].message > 100) && prodPrice === 0) {
       setProdPrice((props.steps[506].message - 100) * utils.prodPrice);
+    }
+  } else if (props.landingPage) {
+    if (landingPagePrice === 0) {
+      setLandingPagePrice(utils.landingPagePrice)
     }
   } else {
     if ((props.steps[20].message > 10) && pgsPrice === 0) {
@@ -28,21 +33,26 @@ function Quote(props) {
 
   utils.maskMoney();
 
-  return (
-    props.ecommerce ?
-      <div>
-        <p><b>E-commerce (base de preço)</b>: R$ <span className="money">{utils.formatNum(utils.ecommercePrice)}</span></p>
-        <p><b>Produtos (x{props.steps[506].message})</b>: R$ <span className="money">{utils.formatNum(prodPrice)}</span></p>
-        <TotalService ecommerce={true} ecommercePrice={utils.ecommercePrice} prodPrice={prodPrice} pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
-      </div>
-      : <div>
-        <p><b>Website (base de preço)</b>: R$ <span className="money">{utils.formatNum(utils.websitePrice)}</span></p>
-        <p><b>Páginas (x{props.steps[20].message})</b>: R$ <span className="money">{utils.formatNum(pgsPrice)}</span></p>
-        <DesignService quoteData={props} />
-        <LogoService quoteData={props} />
-        <TotalService pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
-      </div>
-  )
+  if (props.ecommerce) {
+    return <div>
+      <p><b>E-commerce (base de preço)</b>: R$ <span className="money">{utils.formatNum(utils.ecommercePrice)}</span></p>
+      <p><b>Produtos (x{props.steps[506].message})</b>: R$ <span className="money">{utils.formatNum(prodPrice)}</span></p>
+      <TotalService ecommerce={true} ecommercePrice={utils.ecommercePrice} prodPrice={prodPrice} pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
+    </div>
+  } else if (props.landingPage) {
+    return <div>
+      <p><b>Landing page (base de preço)</b>: R$ <span className="money">{utils.formatNum(utils.landingPagePrice)}</span></p>
+      <TotalService landingPage={true} landingPagePrice={utils.landingPagePrice} quoteData={props} />
+    </div>
+  } else {
+    return <div>
+      <p><b>Website (base de preço)</b>: R$ <span className="money">{utils.formatNum(utils.websitePrice)}</span></p>
+      <p><b>Páginas (x{props.steps[20].message})</b>: R$ <span className="money">{utils.formatNum(pgsPrice)}</span></p>
+      <DesignService quoteData={props} />
+      <LogoService quoteData={props} />
+      <TotalService pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
+    </div>
+  }
 }
 
 function App(props) {
@@ -80,14 +90,15 @@ function App(props) {
           },
           {
             id: '500',
-            message: 'Você precisa de um site institucional ou de um e-commerce?',
+            message: 'De qual serviço você precisa?',
             trigger: '501'
           },
           {
             id: '501',
             options: [
               { value: 1, label: 'Site institucional', trigger: '502' },
-              { value: 2, label: 'E-commerce', trigger: '503' }
+              { value: 2, label: 'E-commerce', trigger: '503' },
+              { value: 3, label: 'Landing page', trigger: '508' }
             ]
           },
           {
@@ -136,6 +147,11 @@ function App(props) {
           {
             id: '507',
             component: <Quote ecommerce={true} steps={props.steps} />,
+            trigger: '200'
+          },
+          {
+            id: '508',
+            component: <Quote landingPage={true} steps={props.steps} />,
             trigger: '200'
           },
           {
