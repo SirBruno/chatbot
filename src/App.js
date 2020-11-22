@@ -250,7 +250,7 @@ function App(props) {
           {
             id: '21',
             component: <Quote />,
-            trigger: '19'
+            trigger: '200'
           },
         ]}
       />
