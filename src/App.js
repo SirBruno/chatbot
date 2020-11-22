@@ -70,7 +70,7 @@ function App(props) {
           },
           {
             id: '300',
-            component: <GetPrice steps={props.steps} pagePrice={utils.formatNum(utils.pagePrice)} maskMoney={utils.maskMoney} websitePrice={utils.formatNum(utils.websitePrice)} />,
+            component: <GetPrice steps={props.steps} ecommercePrice={utils.formatNum(utils.ecommercePrice)} landingPagePrice={utils.formatNum(utils.landingPagePrice)} prodPrice={utils.formatNum(utils.prodPrice)} pagePrice={utils.formatNum(utils.pagePrice)} maskMoney={utils.maskMoney} websitePrice={utils.formatNum(utils.websitePrice)} />,
             trigger: '200',
           },
           {
@@ -219,7 +219,7 @@ function App(props) {
                 <div>Nós ofereçemos serviços de desenvolvimento web e design gráfico.</div>
               </div>
             ),
-            trigger: '14'
+            trigger: '200'
           },
           {
             id: '19',

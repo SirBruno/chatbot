@@ -9,6 +9,7 @@ const utils = {
   ecommercePrice: 12000.00,
   pagePrice: 450.00,
   prodPrice: 10.00,
+  landingPagePrice: 1400.00
 }
 
 export default utils;
