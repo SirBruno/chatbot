@@ -66,30 +66,30 @@ function App(props) {
       <ChatBot width="600px" botAvatar={botImg}
         steps={[
           {
-            id: '100',
+            id: '1',
             message: 'Olá, como posso ajudar?',
-            trigger: '200',
+            trigger: '2',
           },
           {
-            id: '200',
+            id: '2',
             options: [
-              { value: 1, label: 'Orçamento', trigger: '500' },
+              { value: 1, label: 'Orçamento', trigger: '5' },
               { value: 2, label: 'Serviços', trigger: '6' },
-              { value: 3, label: 'Valores', trigger: '300' },
+              { value: 3, label: 'Valores', trigger: '3' },
             ]
           },
           {
-            id: '300',
+            id: '3',
             component: <GetPrice steps={props.steps} ecommercePrice={utils.formatNum(utils.ecommercePrice)} landingPagePrice={utils.formatNum(utils.landingPagePrice)} prodPrice={utils.formatNum(utils.prodPrice)} pagePrice={utils.formatNum(utils.pagePrice)} maskMoney={utils.maskMoney} websitePrice={utils.formatNum(utils.websitePrice)} />,
-            trigger: '200',
+            trigger: '2',
           },
           {
-            id: '400',
+            id: '4',
             user: true,
-            trigger: '300',
+            trigger: '3',
           },
           {
-            id: '500',
+            id: '5',
             message: 'De qual serviço você precisa?',
             trigger: '501'
           },
@@ -147,12 +147,12 @@ function App(props) {
           {
             id: '507',
             component: <Quote ecommerce={true} steps={props.steps} />,
-            trigger: '200'
+            trigger: '2'
           },
           {
             id: '508',
             component: <Quote landingPage={true} steps={props.steps} />,
-            trigger: '200'
+            trigger: '2'
           },
           {
             id: '17',
@@ -177,7 +177,7 @@ function App(props) {
           {
             id: '8',
             message: 'Desculpe, infelizmente não poderemos te ajudar.',
-            trigger: '200'
+            trigger: '2'
           },
           {
             id: '7',
@@ -235,7 +235,7 @@ function App(props) {
                 <div>Nós ofereçemos serviços de desenvolvimento web e design gráfico.</div>
               </div>
             ),
-            trigger: '200'
+            trigger: '2'
           },
           {
             id: '19',
@@ -250,7 +250,7 @@ function App(props) {
           {
             id: '21',
             component: <Quote />,
-            trigger: '200'
+            trigger: '2'
           },
         ]}
       />
