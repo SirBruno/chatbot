@@ -18,8 +18,8 @@ function Quote(props) {
   const [landingPagePrice, setLandingPagePrice] = useState(0);
 
   if (props.ecommerce) {
-    if ((props.steps[506].message > 100) && prodPrice === 0) {
-      setProdPrice((props.steps[506].message - 100) * utils.prodPrice);
+    if ((props.steps[27].message > 100) && prodPrice === 0) {
+      setProdPrice((props.steps[27].message - 100) * utils.prodPrice);
     }
   } else if (props.landingPage) {
     if (landingPagePrice === 0) {
@@ -36,7 +36,7 @@ function Quote(props) {
   if (props.ecommerce) {
     return <div>
       <p><b>E-commerce (base de preço)</b>: R$ <span className="money">{utils.formatNum(utils.ecommercePrice)}</span></p>
-      <p><b>Produtos (x{props.steps[506].message})</b>: R$ <span className="money">{utils.formatNum(prodPrice)}</span></p>
+      <p><b>Produtos (x{props.steps[27].message})</b>: R$ <span className="money">{utils.formatNum(prodPrice)}</span></p>
       <TotalService ecommerce={true} ecommercePrice={utils.ecommercePrice} prodPrice={prodPrice} pgsPrice={pgsPrice} websitePrice={utils.websitePrice} quoteData={props} />
     </div>
   } else if (props.landingPage) {
@@ -57,7 +57,7 @@ function Quote(props) {
 
 function App(props) {
 
-  // const [lastMsg, setLastMsg] = useState(null);
+  // const [personName, setPersonName] = useState(null);
   // const [quote, setQuote] = useState({ graphicDesign: 0 });
 
   return (
@@ -66,8 +66,20 @@ function App(props) {
       <ChatBot width="600px" botAvatar={botImg}
         steps={[
           {
+            id: '30',
+            message: 'Olá, qual o seu nome?',
+            trigger: '31',
+          },
+          {
+            id: '31',
+            user: true,
+            trigger: '1',
+          },
+          {
             id: '1',
-            message: 'Olá, como posso ajudar?',
+            message: ({ previousValue }) => {
+              return `É um prazer atendê-lo ${utils.formatPersonName(previousValue)}, como posso ajudar?`
+            },
             trigger: '2',
           },
           {
@@ -91,18 +103,18 @@ function App(props) {
           {
             id: '5',
             message: 'De qual serviço você precisa?',
-            trigger: '501'
+            trigger: '22'
           },
           {
-            id: '501',
+            id: '22',
             options: [
-              { value: 1, label: 'Site institucional', trigger: '502' },
-              { value: 2, label: 'E-commerce', trigger: '503' },
-              { value: 3, label: 'Landing page', trigger: '508' }
+              { value: 1, label: 'Site institucional', trigger: '23' },
+              { value: 2, label: 'E-commerce', trigger: '24' },
+              { value: 3, label: 'Landing page', trigger: '29' }
             ]
           },
           {
-            id: '502',
+            id: '23',
             message: 'Seu site precisa de funcionalidades que o WordPress não possui nativamente?',
             // message: ({ previousValue, steps }) => {
             //   console.log(previousValue);
@@ -121,36 +133,36 @@ function App(props) {
             trigger: '17'
           },
           {
-            id: '503',
+            id: '24',
             message: 'Qual plataforma de e-commerce deseja usar?',
-            trigger: '504'
+            trigger: '25'
           },
           {
-            id: '504',
+            id: '25',
             options: [
-              { value: 1, label: 'WooCommerce', trigger: '505' },
-              { value: 2, label: 'Shopify', trigger: '505' },
-              { value: 3, label: 'Loja integrada', trigger: '505' },
-              { value: 4, label: 'VTEX', trigger: '505' },
+              { value: 1, label: 'WooCommerce', trigger: '26' },
+              { value: 2, label: 'Shopify', trigger: '26' },
+              { value: 3, label: 'Loja integrada', trigger: '26' },
+              { value: 4, label: 'VTEX', trigger: '26' },
             ]
           },
           {
-            id: '505',
+            id: '26',
             message: 'Quantos produtos deseja cadastrar na loja?',
-            trigger: '506'
+            trigger: '27'
           },
           {
-            id: '506',
+            id: '27',
             user: true,
-            trigger: '507',
+            trigger: '28',
           },
           {
-            id: '507',
+            id: '28',
             component: <Quote ecommerce={true} steps={props.steps} />,
             trigger: '2'
           },
           {
-            id: '508',
+            id: '29',
             component: <Quote landingPage={true} steps={props.steps} />,
             trigger: '2'
           },
