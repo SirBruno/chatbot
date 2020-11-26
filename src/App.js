@@ -88,7 +88,57 @@ function App(props) {
               { value: 1, label: 'Orçamento', trigger: '5' },
               { value: 2, label: 'Serviços', trigger: '6' },
               { value: 3, label: 'Valores', trigger: '3' },
+              { value: 4, label: 'Contato', trigger: '34' },
             ]
+          },
+          {
+            id: '34',
+            message: 'O contato ocorrerá por telefone ou email?',
+            trigger: '35',
+          },
+          {
+            id: '35',
+            options: [
+              { value: 1, label: 'Telefone', trigger: '36' },
+              { value: 2, label: 'Email', trigger: '42' }
+            ]
+          },
+          {
+            id: '42',
+            message: 'Anote aí, vendas@mail.com. Podemos lhe auxiliar em algo mais?',
+            trigger: '2',
+          },
+          {
+            id: '36',
+            message: 'Prefere nos ligar ou deseja que entremos em contato?',
+            trigger: '37',
+          },
+          {
+            id: '37',
+            options: [
+              { value: 1, label: 'Quero entrar em contato', trigger: '38' },
+              { value: 2, label: 'Prefiro que me liguem', trigger: '39' }
+            ]
+          },
+          {
+            id: '38',
+            message: 'Anote aí, (19) 2545-4838 / 98669-4214. Podemos lhe auxiliar em algo mais?',
+            trigger: '2'
+          },
+          {
+            id: '39',
+            message: 'Por favor, informe o seu número com DDD.',
+            trigger: '40',
+          },
+          {
+            id: '40',
+            user: true,
+            trigger: '41',
+          },
+          {
+            id: '41',
+            message: 'Já anotamos aqui. Entraremos em contato durante nosso horário comercial dentro dos próximos dias. Podemos lhe auxiliar em algo mais?',
+            trigger: '2',
           },
           {
             id: '3',
