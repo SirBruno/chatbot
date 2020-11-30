@@ -8,8 +8,8 @@ export default function LogoService(props) {
 
   const [logoData, setLogoData] = useState(0);
 
-  if (props.quoteData.steps[13].message === 'Não') {
-    if ((props.quoteData.steps[18].message === 'Sim') && (!logoData)) {
+  if (props.quoteData.steps[13]?.message === 'Não') {
+    if ((props.quoteData.steps[18]?.message === 'Sim') && (!logoData)) {
       setLogoData(4000.00)
     }
   }
