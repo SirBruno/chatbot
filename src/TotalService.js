@@ -14,14 +14,14 @@ export default function TotalService(props) {
   } else if (props.landingPage) {
 
   } else {
-    if (props.quoteData.steps[13].message === 'Não') {
-      if ((props.quoteData.steps[18].message === 'Sim') && (!logoData)) {
+    if (props.quoteData.steps[13]?.message === 'Não') {
+      if ((props.quoteData.steps[18]?.message === 'Sim') && (!logoData)) {
         setLogoData(4000.00)
       }
     }
 
-    if (props.quoteData.steps[9].message === 'Não') {
-      if ((props.quoteData.steps[11].message === 'Sim') && (!designData)) {
+    if (props.quoteData.steps[9]?.message === 'Não') {
+      if ((props.quoteData.steps[11]?.message === 'Sim') && (!designData)) {
         setDesignData(2700.00)
       }
     }

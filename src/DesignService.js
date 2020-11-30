@@ -8,8 +8,8 @@ export default function DesignService(props) {
 
   const [designData, setDesignData] = useState(0);
 
-  if (props.quoteData.steps[9].message === 'Não') {
-    if ((props.quoteData.steps[11].message === 'Sim') && (!designData)) {
+  if (props.quoteData.steps[9]?.message === 'Não') {
+    if ((props.quoteData.steps[11]?.message === 'Sim') && (!designData)) {
       setDesignData(2700.00)
     }
   }
