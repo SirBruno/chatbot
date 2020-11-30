@@ -160,7 +160,85 @@ function App(props) {
             options: [
               { value: 1, label: 'Site institucional', trigger: '23' },
               { value: 2, label: 'E-commerce', trigger: '24' },
-              { value: 3, label: 'Landing page', trigger: '29' }
+              { value: 3, label: 'Landing page', trigger: '29' },
+              { value: 4, label: 'Não tenho certeza', trigger: '32' },
+            ]
+          },
+          {
+            id: '32',
+            message: 'Seu foco é vender produtos?',
+            trigger: '33'
+          },
+          {
+            id: '33',
+            options: [
+              { value: 1, label: 'Sim', trigger: '43' },
+              { value: 2, label: 'Não', trigger: '49' }
+            ]
+          },
+          {
+            id: '49',
+            message: 'Você precisa disponibilizar informações de contato, serviços, ou outras informações sobre sua empresa, instituição ou ONG?',
+            trigger: '50'
+          },
+          {
+            id: '50',
+            options: [
+              { value: 1, label: 'Sim', trigger: '51' },
+              { value: 2, label: 'Não', trigger: '53' }
+            ]
+          },
+          {
+            id: '51',
+            message: 'Então a opção mais adequada para você é um site institucional. Nesse tipo de site você poderá fazer a apresentação da sua empresa ou instituição, contendo páginas como "Quem somos", "Catálogo (de produtos e/ou serviços)", "Contato". Gostaria de continuar com o orçamento para um site institucional?',
+            trigger: '52'
+          },
+          {
+            id: '53',
+            message: 'Desculpe, infelizmente não poderemos te ajudar com o tipo de serviço que busca.',
+            trigger: '2'
+          },
+          {
+            id: '52',
+            options: [
+              { value: 1, label: 'Sim', trigger: '23' },
+              { value: 2, label: 'Não', trigger: '2' }
+            ]
+          },
+          {
+            id: '43',
+            message: 'Você deseja vender um produto específico (por exemplo, um eBook, ingressos para um evento, etc.) ou vender diversos produtos?',
+            trigger: '44'
+          },
+          {
+            id: '44',
+            options: [
+              { value: 1, label: 'Produto específico', trigger: '45' },
+              { value: 2, label: 'Diversos produtos', trigger: '46' }
+            ]
+          },
+          {
+            id: '46',
+            message: 'Então a opção mais adequada para você é um E-commerce. Nesse tipo de plataforma, você poderá cadastrar e vender seus produtos online. Gostaria de continuar com o orçamento para um E-commerce?',
+            trigger: '48'
+          },
+          {
+            id: '48',
+            options: [
+              { value: 1, label: 'Sim', trigger: '24' },
+              { value: 2, label: 'Não', trigger: '2' }
+            ]
+          },
+          {
+            id: '45',
+            message: 'Então o serviço ideal para você seria uma landing page. Deseja consultar o valor do serviço?',
+            trigger: '47'
+          },
+          {
+            id: '47',
+            options: [
+              { value: 1, label: 'Sim', trigger: '29' },
+              { value: 2, label: 'Não', trigger: '2' }
             ]
           },
           {
