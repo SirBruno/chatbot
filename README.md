@@ -1,3 +1,14 @@
+## Projeto de inteligência artificial
+
+### Membros do grupo
+
+- Bruno Pereira
+- Lucas Sartorelli
+- Emerson Pereira
+- Gabriel Oliveira
+- Wilgner Ferreira
+- Thaynara Polettini
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
