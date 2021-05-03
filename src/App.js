@@ -244,20 +244,6 @@ function App(props) {
           {
             id: '23',
             message: 'Seu site precisa de funcionalidades que o WordPress não possui nativamente?',
-            // message: ({ previousValue, steps }) => {
-            //   console.log(previousValue);
-            //   if (previousValue.toLowerCase() === 'bruno') {
-            //     return `Em que posso ajudar, mestre?`
-            //   } else if (previousValue.includes('vegano')) {
-            //     return `Vegano é meu ovo`
-            //   } else if (previousValue.includes('time')) {
-            //     return `Eu nem assisto futebol parcero`
-            //   } else if (previousValue.includes('tudo bem?')) {
-            //     return `Sim, e vc?`
-            //   } else if (previousValue.toLowerCase() === 'tudo') {
-            //     return `legal`
-            //   } else return `fodase kkkkkkkk`
-            // },
             trigger: '17'
           },
           {
